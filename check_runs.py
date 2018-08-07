@@ -2,45 +2,27 @@ import sqlite3
 conn = sqlite3.connect ('SRAmetadb.sqlite')
 c = conn.cursor()
 
-        ##experiment_ID on muliple/single runs##
+        #experiment_ID:
+        #How many experiments are there with single runs? 3471647
+c.execute('SELECT experiment_ID, COUNT(*) AS RecordCount FROM sra GROUP BY experiment_ID HAVING COUNT(*)==1;')
+print len(c.fetchall())
+    #How many experiments are there with multiple runs? 164200
+c.execute('SELECT experiment_ID, COUNT(*) AS RecordCount FROM sra GROUP BY experiment_ID HAVING COUNT(*)>1;')
+print len(c.fetchall())
 
-#c.execute('SELECT COUNT (*) as "Number of Rows" FROM sra GROUP BY experiment_ID HAVING COUNT(experiment_ID) ==1;')<---
-#got all (1,0) for return values
-
-#TOTALROWS#####c.execute('SELECT COUNT(*) as "Number of Rows" FROM sra;')======[(4103273,)]
-
-###c.execute('SELECT experiment_ID, COUNT(*) FROM sra GROUP BY experiment_ID HAVING COUNT (*) == 1;')===returns exp id w/counts
-##experiment_ID # showing they appeared once --over 4 million exps
-##c.execute ('SELECT COUNT(experiment_ID) FROM sra GROUP BY experiment_ID HAVING COUNT(experiment_ID) > 1;')==returns how many time it appears but no total
-#c.execute('SELECT COUNT(experiment_ID) as "Number of Rows" FROM sra GROUP BY experiment_ID HAVING COUNT(*) >= 2;')==returns count
-##c.execute('SELECT COUNT(experiment_ID) FROM sra WHERE (COUNT(experiment_ID) > 1);')
-
-#TOTALEXP_IDc.execute('SELECT COUNT(experiment_ID) FROM sra;')==[(4102108,)]=====TOTAL experiment_ID
-#c.execute('SELECT COUNT(DISTINCT study_ID) FROM sra;')==[(3635846,)]===TOTAL DISTINCT experiment_ID
+    #study_ID:
+    #How many studies are there with single experiments? 36530
+c.execute('SELECT study_ID, COUNT(*) AS RecordCount FROM sra GROUP BY study_ID HAVING COUNT(*)==1;')
+print len(c.fetchall())
+    # How many studies are there with multiple experiments? 76453
 c.execute('SELECT study_ID, COUNT(*) AS RecordCount FROM sra GROUP BY study_ID HAVING COUNT(*)>1;')
-
-
 print len(c.fetchall())
 
 
-
-
-
-
-
-# experiment_ID single run
-#c.execute('SELECT COUNT(run_id), COUNT(experiment_ID) FROM sra GROUP BY run_id HAVING COUNT((experiment_ID)==1);')
-#print c.fetchall()
-
-
-# study_ID muliple runs
-#c.execute('SELECT COUNT(run_id), COUNT(study_ID) FROM sra GROUP BY run_id HAVING COUNT((study_ID)>1);')
-#print c.fetchall()
-# study_ID single runs
-#c.execute('SELECT COUNT(run_id), COUNT(study_ID) FROM sra GROUP BY run_id HAVING COUNT((study_ID)==1);')
-#print c.fetchall()
-
-
-#submission_ID
-#c.execute('SELECT COUNT(run_id), submission_ID FROM sra GROUP BY run_id HAVING COUNT((submission_ID)>1) LIMIT 5;')
-#print c.fetchall()
+    #submission_ID:
+    #How many studies are there with single submissions?  311564
+c.execute('SELECT submission_ID, COUNT(*) AS RecordCount FROM sra GROUP BY submission_ID HAVING COUNT(*)==1;')
+print len(c.fetchall())
+    # How many submissions are there with multiple submissions? 89892
+c.execute('SELECT submission_ID, COUNT(*) AS RecordCount FROM sra GROUP BY submission_ID HAVING COUNT(*)>1;')
+print len(c.fetchall())
