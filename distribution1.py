@@ -4,21 +4,42 @@ import matplotlib.pyplot as plt
 
 
 
-
-objects = ('sing_exp', 'mult_exp')
+#experiment_ID distribution chart
+objects = ('Single experiment runs', 'Multiple experiment runs')
 y_pos = np.arange(len(objects))
-performance = [3471647, 164200]
+num_runs = [3471647, 164200]
 
-
-plt.bar(y_pos, performance, align='center', alpha=0.50)
+plt.bar(y_pos, num_runs, align='center', alpha=0.50)
 plt.xticks(y_pos, objects)
+plt.xlabel('Experiment Runs')
 plt.ylabel('Number of runs')
-plt.title('Distribution of experiment_ID runs')
+plt.title('Distribution of experiment runs')
+plt.tight_layout()
 plt.show()
 
+#study_ID distribution chart
+objects = ('Single study runs', 'Multiple study runs')
+y_pos = np.arange(len(objects))
+num_runs = [36530, 76453]
 
+plt.bar(y_pos, num_runs, align='center', alpha=0.50)
+plt.xticks(y_pos, objects)
+plt.xlabel('Study Runs')
+plt.ylabel('Number of runs')
+plt.title('Distribution of study runs')
+plt.show()
 
+objects = ('Single submission runs', 'Multiple submission runs')
+y_pos = np.arange(len(objects))
+num_runs = [311564, 89892]
 
+plt.bar(y_pos, num_runs, align='center', alpha=0.50)
+plt.xticks(y_pos, objects)
+plt.xlabel('Submission Runs')
+plt.ylabel('Number of runs')###########################
+plt.title('Distribution of submission runs')
+plt.tight_layout()
+plt.show()
 
 
 
